@@ -42,6 +42,7 @@ const Question = () => {
     const [showButtons, setShowButtons] = useState(true);
     const [displayText, setDisplayText] = useState("Will you be my Valentine's, Pachu?");
     const [imagePositions, setImagePositions] = useState([]);
+    const [showSentence, setShowSentence] = useState(false);
 
     const handleNoButtonClick = () => {
         setNoButtonText(promptArray[promptIndex]);
@@ -52,6 +53,7 @@ const Question = () => {
             top: `${Math.random() * 90}vh`
         };
         setImagePositions((prevPositions) => [...prevPositions, newPosition]);
+        setShowSentence(true);
     };
 
     const handleYesButtonClick = () => {
@@ -59,6 +61,7 @@ const Question = () => {
         setDisplayText("I always knew you liked me :)");
         setCurrentGifIndex(1);
         setImagePositions([]);
+        setShowSentence(false);
     };
 
     return (
@@ -77,8 +80,9 @@ const Question = () => {
                     }}
                 />
             ))}
-            <img style={{ height: "250px" }} src={gifUrls[currentGifIndex]} alt="GIF" /><br />
+            <img style={{ height: "300px" }} src={gifUrls[currentGifIndex]} alt="GIF" /><br />
             <h1 className="question-text" style={{ fontFamily: 'Great Vibes, cursive', fontSize: '75px' }}>{displayText}</h1>
+            {showSentence && <p style={{ fontSize: '20px', fontFamily: 'Shadows Into Light, cursive' }}>The photo will keep coming till you press Yes😊</p>}
             {showButtons && (
                 <div className="button-container">
                     <button className="btn btn-success m-2" style={{ fontSize: `${yesButtonSize}rem` }} onClick={handleYesButtonClick}>Yes</button>
